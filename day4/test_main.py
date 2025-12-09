@@ -13,10 +13,16 @@ TEST_CASES_FEWER_THAN_4 = [
     },
 ]
 
-TEST_CASE_CAN_BE_REMOVED = {
-    "input_file": "test_input.txt",
-    "expected_count": 43,
-}
+TEST_CASES_CAN_BE_REMOVED = [
+    {
+        "input_file": "test_input.txt",
+        "expected_count": 43,
+    },
+    {
+        "input_file": "puzzle_input.txt",
+        "expected_count": 9120,
+    },
+]
 
 
 @pytest.mark.parametrize("test_case", TEST_CASES_FEWER_THAN_4)
@@ -29,11 +35,12 @@ def test_input_files(test_case):
     )
 
 
-def test_count_elements_that_can_be_removed():
+@pytest.mark.parametrize("test_case", TEST_CASES_CAN_BE_REMOVED)
+def test_count_elements_that_can_be_removed(test_case):
     """Test count_elements_that_can_be_removed function."""
-    count = count_elements_that_can_be_removed(TEST_CASE_CAN_BE_REMOVED["input_file"])
-    assert count == TEST_CASE_CAN_BE_REMOVED["expected_count"], (
-        f"File '{TEST_CASE_CAN_BE_REMOVED['input_file']}': "
-        f"expected count={TEST_CASE_CAN_BE_REMOVED['expected_count']}, got {count}"
+    count = count_elements_that_can_be_removed(test_case["input_file"])
+    assert count == test_case["expected_count"], (
+        f"File '{test_case['input_file']}': "
+        f"expected count={test_case['expected_count']}, got {count}"
     )
 
